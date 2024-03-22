@@ -1,47 +1,56 @@
+import java.util.ArrayList;
+
 public class Book {
-    private String title;
-    private String author;
-    private int publicationYear;
-    private Availability availability;
 
-    public Book(String title, String author, int publicationYear, Availability availability) {
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
+    
+    private String name;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private ArrayList<String> autor;
+    public String getAutor() {
+        String txt = "";
+        for (String item : autor) {
+            if (autor.getLast() != item){
+                txt = String.format("%s%s, ", txt, item);
+            }
+            else {
+                txt = String.format("%s%s", txt, item);
+            }
+        }
+        return txt;
+    }
+    public void setAutor(ArrayList<String> autor) {
+        this.autor = autor;
+    }
+
+    private int publishYear;
+    public int getPublishYear() {
+        return publishYear;
+    }
+    public void setPublishYear(int publishYear) {
+        this.publishYear = publishYear;
+    }
+
+    private Boolean availability;
+    public String getAvailability() {
+
+        if(availability){
+            return "k dispozici";
+        }
+        else {
+            return "vypůjčeno";
+        }
+    }
+    public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public int getPublicationYear() {
-        return publicationYear;
-    }
-
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
-    }
-
-    public Availability getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Availability availability) {
-        this.availability = availability;
-    }
-}
-
-enum Availability {available, borrowed}
+    
+    public Book(String name, ArrayList<String> autor, int publishYear, Boolean availability) {
+        this.name = name;
+        this.autor = autor;
+        this.publishYear = publishYear;

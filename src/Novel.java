@@ -1,3 +1,4 @@
+
 public class Novel extends Book {
     private Genre genre;
 
