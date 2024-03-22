@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Book {
 
-
     private String name;
 
     public String getName() {
@@ -18,7 +17,7 @@ public class Book {
     public String getAutor() {
         String txt = "";
         for (String item : autor) {
-            if (autor.getLast() != item) {
+            if (autor.get(autor.size() - 1) != item) {
                 txt = String.format("%s%s, ", txt, item);
             } else {
                 txt = String.format("%s%s", txt, item);
