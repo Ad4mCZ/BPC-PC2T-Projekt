@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-abstract public class Book {
+public class Book {
     
     private String name;
     public String getName() {
@@ -11,8 +11,17 @@ abstract public class Book {
     }
 
     private ArrayList<String> autor;
-    public ArrayList<String> getAutor() {
-        return autor;
+    public String getAutor() {
+        String txt = "";
+        for (String item : autor) {
+            if (autor.getLast() != item){
+                txt = String.format("%s%s, ", txt, item);
+            }
+            else {
+                txt = String.format("%s%s", txt, item);
+            }
+        }
+        return txt;
     }
     public void setAutor(ArrayList<String> autor) {
         this.autor = autor;
@@ -27,8 +36,14 @@ abstract public class Book {
     }
 
     private Boolean availability;
-    public Boolean getAvailability() {
-        return availability;
+    public String getAvailability() {
+
+        if(availability){
+            return "k dispozici";
+        }
+        else {
+            return "vypůjčeno";
+        }
     }
     public void setAvailability(Boolean availability) {
         this.availability = availability;
