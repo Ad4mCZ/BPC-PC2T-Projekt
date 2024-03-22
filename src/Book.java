@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Book {
+
     
     private String name;
     public String getName() {
@@ -53,6 +54,3 @@ public class Book {
         this.name = name;
         this.autor = autor;
         this.publishYear = publishYear;
-        this.availability = availability;
-    }
-}

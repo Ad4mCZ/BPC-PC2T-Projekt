@@ -1,12 +1,19 @@
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Novel extends Book {
+    private Genre genre;
 
-    static final private HashMap<Integer,String> genres = new HashMap<Integer, String>();
-
-    public Novel(String name, ArrayList<String> autor, int publishYear, Boolean availability) {
-        super(name, autor, publishYear, availability);
+    public Novel(String title, String author, int publicationYear, Availability availability, Genre genre) {
+        super(title, author, publicationYear, availability);
+        this.genre = genre;
     }
-    
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 }
+
+enum Genre {romance, fantasy, scifi, mystery, biography}
