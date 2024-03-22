@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 
 public class Novel extends Book {
     private Genre genre;
 
-    public Novel(String title, String author, int publicationYear, Availability availability, Genre genre) {
-        super(title, author, publicationYear, availability);
+    public Novel(String title, ArrayList<String> autor, int publicationYear, boolean availability, Genre genre) {
+        super(title, autor, publicationYear, availability);
         this.genre = genre;
     }
 
