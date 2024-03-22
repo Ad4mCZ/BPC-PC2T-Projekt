@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 
 public class Textbook extends Book {
     private int suitableGrade;
 
-    public Textbook(String title, String author, int publicationYear, Availability availability, int suitableGrade) {
-        super(title, author, publicationYear, availability);
+    public Textbook(String title, ArrayList<String> autor, int publicationYear, boolean availability, int suitableGrade) {
+        super(title, autor, publicationYear, availability);
         this.suitableGrade = suitableGrade;
     }
 

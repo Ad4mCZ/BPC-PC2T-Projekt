@@ -5,12 +5,13 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         ArrayList<String> autors = new ArrayList<String>(Arrays.asList("Karek", "Petr"));
         Book book = new Book("Dune", autors, 1980, true);
 
-
-        System.out.printf("Název: %s\nAutor/Autoři: %s\nRok vydání: %d\nDostupnost: %s\n", book.getName(), book.getAutor(), book.getPublishYear(), book.getAvailability());
+        System.out.printf("Název: %s\n" +
+                "Autor/Autoři: %s\n" +
+                "Rok vydání: %d\n" +
+                "Dostupnost: %s\n", book.getName(), book.getAutor(), book.getPublishYear(), book.getAvailability());
 
     }
 }
