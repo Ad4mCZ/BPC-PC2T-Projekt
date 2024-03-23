@@ -1,19 +1,16 @@
 import java.util.ArrayList;
 
-public class Book {
+abstract public class Book {
 
     private String name;
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
     private ArrayList<String> autor;
-
     public String getAutor() {
         String txt = "";
         for (String item : autor) {
@@ -25,23 +22,22 @@ public class Book {
         }
         return txt;
     }
-
-    public void setAutor(ArrayList<String> autor) {
-        this.autor = autor;
+    public void setAutor(String autor) {
+        String[] autorField = autor.split(", ");
+        for (String item : autorField) {
+            this.autor.add(item);
+        }
     }
 
     private int publishYear;
-
     public int getPublishYear() {
         return publishYear;
     }
-
     public void setPublishYear(int publishYear) {
         this.publishYear = publishYear;
     }
 
     private boolean availability;
-
     public String getAvailability() {
 
         if (!availability) {
@@ -50,14 +46,19 @@ public class Book {
             return "vypůjčeno";
         }
     }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
+    public void setAvailability(String availability) {
+        if (availability.toLowerCase() == "yes") {
+            this.availability = true;
+        }
+        else {
+            this.availability = false;
+        }
     }
 
-    public Book(String name, ArrayList<String> autor, int publishYear, boolean availability) {
+    public Book(String name, String autor, int publishYear, boolean availability) {
         this.name = name;
-        this.autor = autor;
+        setAutor(autor);
         this.publishYear = publishYear;
+        this.availability = availability;
     }
 }
