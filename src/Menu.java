@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -71,8 +70,6 @@ public class Menu {
         System.out.println("Zadejte či je kinha dostupná [Ano|Ne]: ");
         String availability = sc.next();
         // přidat lze jen román || učebnici
-        //Book book = new Book(title, autors, publishYear, true);
-        //System.out.println(book.getAutor() + book.getName() + book.getPublishYear());
         sc.close();
     }
 }
