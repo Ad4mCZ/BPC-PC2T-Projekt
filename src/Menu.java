@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -28,7 +27,6 @@ public class Menu {
                 case 1:
                     // AddBook();
                     System.out.println("Vybrali jste volbu 1.");
-
                     break;
                 case 2:
                     System.out.println("Vybrali jste volbu 2.");
@@ -57,17 +55,21 @@ public class Menu {
     }
 
     public static void AddBook() {
-        ArrayList<String> autors = new ArrayList<String>();
+
+        // Sem se musí přidat něco ve stylu že když napíšeš druhá žánru
+        // nebo když napíšeš pro jakej ročník se to hodí tak podle teho
+        // to přidá román nebo učebnici
+
         Scanner sc = new Scanner(System.in);
         System.out.print("Zadejte název knihy: ");
         String title = sc.next();
+        System.out.print("Zadejte autora/y knihy ve formátu [jméno příjmení, jméno příjmění, ...]: ");
+        String autor = sc.next();
         System.out.print("Zadejte rok vydání knihy: ");
         int publishYear = sc.nextInt();
-        System.out.print("Zadejte autora/y knihy: ");
-        String autor = sc.next();
-        autors.add(autor);
-        Book book = new Book(title, autors, publishYear, true);
-        System.out.println(book.getAutor() + book.getName() + book.getPublishYear());
+        System.out.println("Zadejte či je kinha dostupná [Ano|Ne]: ");
+        String availability = sc.next();
+        // přidat lze jen román || učebnici
         sc.close();
     }
 }
