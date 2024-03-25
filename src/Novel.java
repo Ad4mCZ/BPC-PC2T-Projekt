@@ -1,5 +1,5 @@
 public class Novel extends Book {
-
+    public enum Genre {romance, fantasy, scifi, mystery, biography}
     private Genre genre;
     public Genre getGenre() {
         return genre;
@@ -14,4 +14,3 @@ public class Novel extends Book {
     }
 }
 
-enum Genre {romance, fantasy, scifi, mystery, biography}

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 abstract public class Book {
 
@@ -10,7 +11,7 @@ abstract public class Book {
         this.name = name;
     }
 
-    private ArrayList<String> autor;
+    public ArrayList<String> autor;
     public String getAutor() {
         String txt = "";
         for (String item : autor) {
@@ -24,9 +25,8 @@ abstract public class Book {
     }
     public void setAutor(String autor) {
         String[] autorField = autor.split(", ");
-        for (String item : autorField) {
-            this.autor.add(item);
-        }
+        this.autor = new ArrayList<>();
+        this.autor.addAll(Arrays.asList(autorField));
     }
 
     private int publishYear;
@@ -57,8 +57,8 @@ abstract public class Book {
 
     public Book(String name, String autor, int publishYear, boolean availability) {
         this.name = name;
-        setAutor(autor);
         this.publishYear = publishYear;
         this.availability = availability;
+        setAutor(autor);
     }
 }
