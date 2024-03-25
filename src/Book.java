@@ -25,8 +25,8 @@ abstract public class Book {
     }
     public void setAutor(String autor) {
         String[] autorField = autor.split(", ");
-        this.autor = new ArrayList<>(Arrays.asList(autorField));
-        //this.autor.addAll(Arrays.asList(autorField));
+        this.autor = new ArrayList<>();
+        this.autor.addAll(Arrays.asList(autorField));
     }
 
     private int publishYear;
