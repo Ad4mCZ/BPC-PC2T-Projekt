@@ -15,13 +15,9 @@ abstract public class Book {
     public String getAutor() {
         String txt = "";
         for (String item : autor) {
-            if (autor.get(autor.size() - 1) != item) {
-                txt = String.format("%s%s, ", txt, item);
-            } else {
-                txt = String.format("%s%s", txt, item);
-            }
+            txt = String.format("%s%s, ", txt, item);
         }
-        return txt;
+        return String.format("%s\b\b", txt);
     }
     public void setAutor(String autor) {
         String[] autorField = autor.split(", ");
