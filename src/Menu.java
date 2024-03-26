@@ -32,8 +32,8 @@ public class Menu {
             }
 
             switch (choice) {
-                case 1 -> addBook.AddBook();
-                case 2 -> System.out.println("Vybrali jste volbu 2.");
+                case 1 -> Library.addBook();
+                case 2 -> Library.changeBook();
                 case 3 -> System.out.println("Vybrali jste volbu 3.");
                 case 4 -> System.out.println("Vybrali jste volbu 4.");
                 case 5 -> System.out.println("Vybrali jste volbu 5.");

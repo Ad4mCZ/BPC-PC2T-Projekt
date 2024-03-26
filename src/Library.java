@@ -1,14 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-public class addBook {
-    public static void AddBook() throws IOException {
+public class Library {
 
-        // Sem se musí přidat něco ve stylu že když napíšeš druhá žánru
-        // nebo když napíšeš pro jakej ročník se to hodí tak podle teho
-        // to přidá román nebo učebnici
+    static ArrayList<Book> books = new ArrayList<Book>();
 
+    public static void addBook() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Zadejte název knihy: ");
         String title = reader.readLine();
@@ -29,6 +28,7 @@ public class addBook {
                 //zkontrolovat jestli se jedna o zanr
                 Novel novel = new Novel(title, autor, publishYear, true, genre);
                 System.out.println("Přidán román: " + novel);
+                books.add(novel);
                 break;
             case 2:
                 System.out.print("Napište vhodný ročník: ");
@@ -40,9 +40,20 @@ public class addBook {
                 }
                 //sem asi pridat while
                 Textbook textbook = new Textbook(title, autor, publishYear, true, grade);
-                System.out.println("Přidán román: " + textbook);
+                System.out.println("Přidána učebnice: " + textbook);
+                books.add(textbook);
                 break;
         }
-        System.out.println("Knihu '" + title + "' od autora/ů " + autor + ", vydanou v roce " + publishYear + ", jste úspěšně přidali.");
+
+        //System.out.println("Knihu '" + title + "' od autora/ů " + autor + ", vydanou v roce " + publishYear + ", jste úspěšně přidali.");
+    }
+
+    public static void changeBook(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("vyberte si jakou knihu chcete změnit:");
+        for (Book book : books) {
+            System.out.printf("%s\n", book.getName());
+        }
+        
     }
 }
