@@ -54,17 +54,44 @@ public class Library {
         for (Book book : books) {
             System.out.printf("%s\n",book.getName());
         }
-        System.out.print("vyberte si jakou knihu chcete změnit:");
+        System.out.print("vyberte si jakou knihu chcete změnit: ");
         String choice = reader.readLine();
 
         boolean found = false;
         for (Book book : books) {
             if (book.getName().equalsIgnoreCase(choice)) {
                 found = true;
-                System.out.println("nalezeno");
+                System.out.println("nalezeno\n----------------------");
+
+                // Zadání nových parametrů
+
+                System.out.printf("Změnit název knihy [%s]: ", book.getName());
+                String newName = reader.readLine();
+                if (!newName.isEmpty()) {
+                    book.setName(newName);
+                }
+
+                System.out.printf("Změnit autora/y knihy [%s]", book.getAutor());
+                String newAutor = reader.readLine();
+                if (!newAutor.isEmpty()) {
+                    book.setAutor(newAutor);
+                }
+
+                System.out.printf("Změnit rok vydání knihy [%d]: ", book.getPublishYear());
+                String newPublishYear = reader.readLine();
+                try {
+                    if (!newPublishYear.isEmpty()) {
+                        book.setPublishYear(Integer.parseInt(newPublishYear));
+                    }
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Neplatný formát ročníku. Zůstává původní rok.");
+                }
+
                 break;
             }
             else System.out.println("nenalezeno");
         }
+
     }
 }
