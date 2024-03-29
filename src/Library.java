@@ -1,11 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Library {
 
-    static ArrayList<Book> books = new ArrayList<Book>();
+    //static ArrayList<Book> books = new ArrayList<Book>();
+    static ArrayList<Book> books = new ArrayList<>();
 
     public static void addBook() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -48,12 +49,22 @@ public class Library {
         //System.out.println("Knihu '" + title + "' od autora/ů " + autor + ", vydanou v roce " + publishYear + ", jste úspěšně přidali.");
     }
 
-    public static void changeBook(){
+    public static void editBook() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("vyberte si jakou knihu chcete změnit:");
         for (Book book : books) {
-            System.out.printf("%s\n", book.getName());
+            System.out.printf("%s\n",book.getName());
         }
-        
+        System.out.print("vyberte si jakou knihu chcete změnit:");
+        String choice = reader.readLine();
+
+        boolean found = false;
+        for (Book book : books) {
+            if (book.getName().equalsIgnoreCase(choice)) {
+                found = true;
+                System.out.println("nalezeno");
+                break;
+            }
+            else System.out.println("nenalezeno");
+        }
     }
 }
