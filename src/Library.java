@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+import org.w3c.dom.Text;
+
+
 public class Library {
 
     //static ArrayList<Book> books = new ArrayList<Book>();
@@ -101,12 +104,81 @@ public class Library {
                     } catch (NumberFormatException e) {
                         System.out.println("Neplatný formát ročníku. Zůstává původní rok.");
                     }
+
+
+
+                    // Jenom tohle jsem přidal snad to fachá dobře
+
+                    String typeChange;
+                    System.out.printf("Kniha je %s\nZměnit [a/n]: ", book);
+                    while (true) {
+                        typeChange = reader.readLine();
+                        if (typeChange.equals("a") || typeChange.equals("n")) break;
+                        else System.out.print("Změnit [a/n]: ");
+                    }
+
+                    if (typeChange.equals("n")) {
+                        if (book instanceof Novel) {
+                            ((Novel)book).setGenre(changeGenre());
+                        }
+                        else {
+                            ((Textbook)book).setSuitableGrade(changeGrade());
+                        }
+                    }
+                    else {
+                        if (book instanceof Novel) {
+                            int grade = changeGrade();
+                            book = new Textbook(newName, newAutor, Integer.parseInt(newPublishYear), true, grade);
+                        }
+                        else {
+                            Novel.Genre genre = changeGenre();
+                            book = new Novel(newName, newAutor, Integer.parseInt(newPublishYear), true, genre);
+                        }
+                    }
+
+                    // KONEC mého přidání xdd
+
+
                     endLoop = false;
-                    // Zadání nových parametrů
                 }
             }
             if (endLoop)
                 System.out.println("Nenalezeno, zkus to prosím znovu");
         }
+    }
+
+    static Novel.Genre changeGenre() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Vyberte žánr (");
+        for (Novel.Genre genre : Novel.Genre.values()) {
+            System.out.print(genre + ", ");
+        }
+        System.out.print("\b\b): ");
+        while (true) {
+            String stringGenre = reader.readLine();
+            //if (genre.contains(Novel.Genre.values().toString())){
+            //    return (Novel.Genre.valueOf(genre));
+            //}
+            for (Novel.Genre genre : Novel.Genre.values()) {
+                if (stringGenre.equalsIgnoreCase(String.valueOf(genre))) {
+                    return genre;
+                }
+            }
+            System.out.println("Špatný vstup zkus to znovu.");
+        }        
+    }
+
+    static int changeGrade() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Napište vhodný ročník: ");
+        int grade = 0;
+        try {
+            grade = Integer.parseInt(reader.readLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Neplatná volba. Zadejte prosím číslo.");
+        }
+        //sem asi pridat while
+
+        return grade;
     }
 }
