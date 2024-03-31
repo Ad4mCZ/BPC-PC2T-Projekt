@@ -17,7 +17,7 @@ public class Library {
         System.out.print("Zadejte rok vydání knihy: ");
         int publishYear = Integer.parseInt(reader.readLine());
 
-        int bookType = 0;
+        int bookType;
         System.out.print("Jedná se o román (1) nebo učebnici (2)?: ");
         while (true) {
             bookType = Integer.parseInt(reader.readLine());
@@ -103,8 +103,10 @@ public class Library {
                     }
                     endLoop = false;
                     // Zadání nových parametrů
-                } else System.out.println("Nenalezeno, zkus to prosím znovu");
+                }
             }
+            if (endLoop)
+                System.out.println("Nenalezeno, zkus to prosím znovu");
         }
     }
 }
