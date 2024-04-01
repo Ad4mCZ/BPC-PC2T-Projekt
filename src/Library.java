@@ -136,16 +136,18 @@ public class Library {
                     }
                     else {
                         if (book instanceof Novel) {
-                            int grade = changeGrade();
-                            books.remove(book);
-                            Textbook textBook = new Textbook(newName, newAutor, newPublishYear, true, grade);
-                            books.add(textBook);
+                            //int grade = changeGrade();
+                            //books.remove(book);
+                            //Textbook textBook = new Textbook(newName, newAutor, newPublishYear, true, grade);
+                            //books.add(textBook);
+                            book = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
                         }
                         else {
-                            Novel.Genre genre = changeGenre();
-                            books.remove(book);
-                            Novel novel = new Novel(newName, newAutor, newPublishYear, true, genre);
-                            books.add(novel);
+                            //Novel.Genre genre = changeGenre();
+                            //books.remove(book);
+                            //Novel novel = new Novel(newName, newAutor, newPublishYear, true, genre);
+                            //books.add(novel);
+                            book = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
                         }
                     }
 
