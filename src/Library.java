@@ -3,9 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import org.w3c.dom.Text;
-
-
 public class Library {
 
     //static ArrayList<Book> books = new ArrayList<Book>();
@@ -88,21 +85,33 @@ public class Library {
                     if (!newName.isEmpty()) {
                         book.setName(newName);
                     }
+                    else {
+                        newName = book.getName();
+                    }
 
                     System.out.printf("Změnit autora/y knihy [%s]: ", book.getAutor());
                     String newAutor = reader.readLine();
                     if (!newAutor.isEmpty()) {
                         book.setAutor(newAutor);
                     }
+                    else {
+                        newAutor = book.getAutor();
+                    }
 
                     System.out.printf("Změnit rok vydání knihy [%d]: ", book.getPublishYear());
-                    String newPublishYear = reader.readLine();
+                    String input = reader.readLine();
+                    int newPublishYear = 0;
                     try {
-                        if (!newPublishYear.isEmpty()) {
-                            book.setPublishYear(Integer.parseInt(newPublishYear));
+                        if (!input.isEmpty()) {
+                            newPublishYear = Integer.parseInt(input);
+                            book.setPublishYear(newPublishYear);
+                        }
+                        else {
+                            newPublishYear = book.getPublishYear();
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Neplatný formát ročníku. Zůstává původní rok.");
+                        newPublishYear = book.getPublishYear();
                     }
 
 
@@ -128,11 +137,15 @@ public class Library {
                     else {
                         if (book instanceof Novel) {
                             int grade = changeGrade();
-                            book = new Textbook(newName, newAutor, Integer.parseInt(newPublishYear), true, grade);
+                            books.remove(book);
+                            Textbook textBook = new Textbook(newName, newAutor, newPublishYear, true, grade);
+                            books.add(textBook);
                         }
                         else {
                             Novel.Genre genre = changeGenre();
-                            book = new Novel(newName, newAutor, Integer.parseInt(newPublishYear), true, genre);
+                            books.remove(book);
+                            Novel novel = new Novel(newName, newAutor, newPublishYear, true, genre);
+                            books.add(novel);
                         }
                     }
 
