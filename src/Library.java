@@ -114,10 +114,6 @@ public class Library {
                         newPublishYear = book.getPublishYear();
                     }
 
-
-
-                    // Jenom tohle jsem přidal snad to fachá dobře
-
                     String typeChange;
                     System.out.printf("Kniha je %s\nZměnit [a/n]: ", book);
                     while (true) {
@@ -136,24 +132,12 @@ public class Library {
                     }
                     else {
                         if (book instanceof Novel) {
-                            //int grade = changeGrade();
-                            //books.remove(book);
-                            //Textbook textBook = new Textbook(newName, newAutor, newPublishYear, true, grade);
-                            //books.add(textBook);
                             book = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
                         }
                         else {
-                            //Novel.Genre genre = changeGenre();
-                            //books.remove(book);
-                            //Novel novel = new Novel(newName, newAutor, newPublishYear, true, genre);
-                            //books.add(novel);
                             book = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
                         }
                     }
-
-                    // KONEC mého přidání xdd
-
-
                     endLoop = false;
                 }
             }
@@ -171,9 +155,6 @@ public class Library {
         System.out.print("\b\b): ");
         while (true) {
             String stringGenre = reader.readLine();
-            //if (genre.contains(Novel.Genre.values().toString())){
-            //    return (Novel.Genre.valueOf(genre));
-            //}
             for (Novel.Genre genre : Novel.Genre.values()) {
                 if (stringGenre.equalsIgnoreCase(String.valueOf(genre))) {
                     return genre;
