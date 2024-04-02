@@ -100,7 +100,7 @@ public class Library {
 
                     System.out.printf("Změnit rok vydání knihy [%d]: ", book.getPublishYear());
                     String input = reader.readLine();
-                    int newPublishYear = 0;
+                    int newPublishYear;
                     try {
                         if (!input.isEmpty()) {
                             newPublishYear = Integer.parseInt(input);
@@ -115,14 +115,14 @@ public class Library {
                     }
 
                     String typeChange;
-                    System.out.printf("Kniha je %s\nZměnit [a/n]: ", book);
+                    System.out.printf("Kniha je %s, Chcete změnit typ? [a/n]: ", book);
                     while (true) {
                         typeChange = reader.readLine();
                         if (typeChange.equals("a") || typeChange.equals("n")) break;
                         else System.out.print("Změnit [a/n]: ");
                     }
 
-                    if (typeChange.equals("n")) {
+                    if (typeChange.equals("n")) {           //tady pridat jeste if, pokud nechce menit (neda input)
                         if (book instanceof Novel) {
                             ((Novel)book).setGenre(changeGenre());
                         }
@@ -160,7 +160,7 @@ public class Library {
                     return genre;
                 }
             }
-            System.out.println("Špatný vstup zkus to znovu.");
+            System.out.print("Špatný vstup zkus to znovu: ");
         }        
     }
 
@@ -171,7 +171,7 @@ public class Library {
         try {
             grade = Integer.parseInt(reader.readLine());
         } catch (NumberFormatException e) {
-            System.out.println("Neplatná volba. Zadejte prosím číslo.");
+            System.out.print("Neplatná volba. Zadejte prosím číslo: ");
         }
         //sem asi pridat while
 
