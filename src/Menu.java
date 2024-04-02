@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Menu {
 
-    public static void mainMenu() throws IOException {
+    public static void mainMenu() {
         int choice;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -26,7 +26,7 @@ public class Menu {
 
             try {
                 choice = Integer.parseInt(reader.readLine());
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | IOException e) {
                 System.out.println("Neplatná volba. Zadejte prosím číslo.");
                 continue;
             }
