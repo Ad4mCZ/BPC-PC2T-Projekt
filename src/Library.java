@@ -84,8 +84,7 @@ public class Library {
                     String newName = reader.readLine();
                     if (!newName.isEmpty()) {
                         book.setName(newName);
-                    }
-                    else {
+                    } else {
                         newName = book.getName();
                     }
 
@@ -93,8 +92,7 @@ public class Library {
                     String newAutor = reader.readLine();
                     if (!newAutor.isEmpty()) {
                         book.setAutor(newAutor);
-                    }
-                    else {
+                    } else {
                         newAutor = book.getAutor();
                     }
 
@@ -105,8 +103,7 @@ public class Library {
                         if (!input.isEmpty()) {
                             newPublishYear = Integer.parseInt(input);
                             book.setPublishYear(newPublishYear);
-                        }
-                        else {
+                        } else {
                             newPublishYear = book.getPublishYear();
                         }
                     } catch (NumberFormatException e) {
@@ -124,17 +121,14 @@ public class Library {
 
                     if (typeChange.equals("n")) {           //tady pridat jeste if, pokud nechce menit (neda input)
                         if (book instanceof Novel) {
-                            ((Novel)book).setGenre(changeGenre());
+                            ((Novel) book).setGenre(changeGenre());
+                        } else {
+                            ((Textbook) book).setSuitableGrade(changeGrade());
                         }
-                        else {
-                            ((Textbook)book).setSuitableGrade(changeGrade());
-                        }
-                    }
-                    else {
+                    } else {
                         if (book instanceof Novel) {
                             book = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
-                        }
-                        else {
+                        } else {
                             book = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
                         }
                     }
@@ -146,7 +140,7 @@ public class Library {
         }
     }
 
-    static Novel.Genre changeGenre() throws IOException{
+    static Novel.Genre changeGenre() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Vyberte žánr (");
         for (Novel.Genre genre : Novel.Genre.values()) {
@@ -161,10 +155,10 @@ public class Library {
                 }
             }
             System.out.print("Špatný vstup zkus to znovu: ");
-        }        
+        }
     }
 
-    static int changeGrade() throws IOException{
+    static int changeGrade() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Napište vhodný ročník: ");
         int grade = 0;
@@ -176,5 +170,41 @@ public class Library {
         //sem asi pridat while
 
         return grade;
+    }
+
+    public static void deleteBook() throws IOException {
+        Book bookToDelete = findBook();
+
+        if (bookToDelete != null) {
+            books.remove(bookToDelete);
+            String name = bookToDelete.getName();
+            System.out.printf("Kniha %s byla smazána.%n", name);
+        }
+    }
+
+    public static Book findBook() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        if (!books.isEmpty()) {
+            for (Book book : books) {
+                System.out.printf("%s\n", book.getName());
+            }
+            boolean endLoop = true;
+            while (endLoop) {
+                System.out.print("Zadejte název knihy: ");
+                String choice = reader.readLine();
+
+                for (Book book : books) {
+                    if (book.getName().equalsIgnoreCase(choice)) {
+                        //System.out.println("nalezeno\n----------------------");
+                        endLoop = false;
+                        return book;
+                    }
+                }
+                if (endLoop)
+                    System.out.println("Nenalezeno, zkus to prosím znovu.");
+            }
+        }
+        System.out.println("Seznam knih je prázdný.");
+        return null;
     }
 }
