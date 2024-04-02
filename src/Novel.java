@@ -12,5 +12,10 @@ public class Novel extends Book {
         super(title, autor, publicationYear, availability);
         this.genre = genre;
     }
+
+    @Override
+    public String toString() {
+        return "román";
+    }
 }
 

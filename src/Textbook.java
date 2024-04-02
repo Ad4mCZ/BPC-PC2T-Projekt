@@ -12,4 +12,9 @@ public class Textbook extends Book {
         super(title, autor, publicationYear, availability);
         this.suitableGrade = suitableGrade;
     }
+
+    @Override
+    public String toString() {
+        return "učebnice";
+    }
 }

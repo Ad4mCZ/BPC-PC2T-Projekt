@@ -85,28 +85,96 @@ public class Library {
                     if (!newName.isEmpty()) {
                         book.setName(newName);
                     }
+                    else {
+                        newName = book.getName();
+                    }
 
                     System.out.printf("Změnit autora/y knihy [%s]: ", book.getAutor());
                     String newAutor = reader.readLine();
                     if (!newAutor.isEmpty()) {
                         book.setAutor(newAutor);
                     }
+                    else {
+                        newAutor = book.getAutor();
+                    }
 
                     System.out.printf("Změnit rok vydání knihy [%d]: ", book.getPublishYear());
-                    String newPublishYear = reader.readLine();
+                    String input = reader.readLine();
+                    int newPublishYear;
                     try {
-                        if (!newPublishYear.isEmpty()) {
-                            book.setPublishYear(Integer.parseInt(newPublishYear));
+                        if (!input.isEmpty()) {
+                            newPublishYear = Integer.parseInt(input);
+                            book.setPublishYear(newPublishYear);
+                        }
+                        else {
+                            newPublishYear = book.getPublishYear();
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Neplatný formát ročníku. Zůstává původní rok.");
+                        newPublishYear = book.getPublishYear();
+                    }
+
+                    String typeChange;
+                    System.out.printf("Kniha je %s, Chcete změnit typ? [a/n]: ", book);
+                    while (true) {
+                        typeChange = reader.readLine();
+                        if (typeChange.equals("a") || typeChange.equals("n")) break;
+                        else System.out.print("Změnit [a/n]: ");
+                    }
+
+                    if (typeChange.equals("n")) {           //tady pridat jeste if, pokud nechce menit (neda input)
+                        if (book instanceof Novel) {
+                            ((Novel)book).setGenre(changeGenre());
+                        }
+                        else {
+                            ((Textbook)book).setSuitableGrade(changeGrade());
+                        }
+                    }
+                    else {
+                        if (book instanceof Novel) {
+                            book = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
+                        }
+                        else {
+                            book = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
+                        }
                     }
                     endLoop = false;
-                    // Zadání nových parametrů
                 }
             }
             if (endLoop)
                 System.out.println("Nenalezeno, zkus to prosím znovu");
         }
+    }
+
+    static Novel.Genre changeGenre() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Vyberte žánr (");
+        for (Novel.Genre genre : Novel.Genre.values()) {
+            System.out.print(genre + ", ");
+        }
+        System.out.print("\b\b): ");
+        while (true) {
+            String stringGenre = reader.readLine();
+            for (Novel.Genre genre : Novel.Genre.values()) {
+                if (stringGenre.equalsIgnoreCase(String.valueOf(genre))) {
+                    return genre;
+                }
+            }
+            System.out.print("Špatný vstup zkus to znovu: ");
+        }        
+    }
+
+    static int changeGrade() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Napište vhodný ročník: ");
+        int grade = 0;
+        try {
+            grade = Integer.parseInt(reader.readLine());
+        } catch (NumberFormatException e) {
+            System.out.print("Neplatná volba. Zadejte prosím číslo: ");
+        }
+        //sem asi pridat while
+
+        return grade;
     }
 }
