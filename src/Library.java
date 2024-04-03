@@ -218,9 +218,11 @@ public class Library {
     public static Book findBook() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if (!books.isEmpty()) {
+            System.out.println("------------------");
             for (Book book : books) {
                 System.out.printf("%s\n", book.getName());
             }
+            System.out.println("------------------");
             while (true) {
                 System.out.print("Zadejte název knihy: ");
                 String choice;
@@ -270,13 +272,13 @@ public class Library {
 
     public static void printBookInfo() {
         Book bookToPrintInfo = findBook();
-        System.out.printf("----------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n", bookToPrintInfo.getName(), bookToPrintInfo.getAutor(), bookToPrintInfo.getPublishYear(), bookToPrintInfo.getStringAvailability());
+        System.out.printf("-------------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n", bookToPrintInfo.getName(), bookToPrintInfo.getAutor(), bookToPrintInfo.getPublishYear(), bookToPrintInfo.getStringAvailability());
         if (bookToPrintInfo instanceof Novel) {
 
             System.out.printf("Kniha je román a žánr je %s\n", ((Novel) bookToPrintInfo).getGenre());
         }
         else {
-            System.out.printf("Kniha je učebnice a je vhodná pro %d. ročníky\n", ((Textbook) bookToPrintInfo).getSuitableGrade());
+            System.out.printf("Kniha je učebnice a je vhodná pro %d. ročníky\n\n", ((Textbook) bookToPrintInfo).getSuitableGrade());
         }
     }
 }
