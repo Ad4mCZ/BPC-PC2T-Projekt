@@ -242,4 +242,25 @@ public class Library {
         System.out.println("Seznam knih je prázdný.");
         return null;
     }
+
+    public static void changeBookAvailbility() {
+        String RED = "\u001B[31m";
+        String RESET = "\u001B[0m";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Book bookToChangeAvaibility = findBook();
+        String avaibilityChange;
+        System.out.printf("Kniha je " + RED + "%s" + RESET + ", Chcete změnit dostupnost? [a/n]: ", bookToChangeAvaibility.getStringAvailability());
+        while (true) {
+            try {
+                avaibilityChange = reader.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (avaibilityChange.equals("a") || avaibilityChange.equals("n")) break;
+            else System.out.print("Změnit [a/n]: ");
+        }
+        if (avaibilityChange.equals("a")) {
+            bookToChangeAvaibility.setAvailability(!bookToChangeAvaibility.getAvailability());
+        }
+    }
 }

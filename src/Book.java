@@ -34,16 +34,18 @@ abstract public class Book {
     }
 
     private boolean availability;
-    public String getAvailability() {
-
-        if (!availability) {
+    public boolean getAvailability(){ 
+        return availability;
+    }
+    public String getStringAvailability() {
+        if (availability) {
             return "k dispozici";
         } else {
-            return "vypůjčeno";
+            return "vypůjčena";
         }
     }
-    public void setAvailability(String availability) {
-        this.availability = availability.equalsIgnoreCase("yes");
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public Book(String name, String autor, int publishYear, boolean availability) {

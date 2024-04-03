@@ -8,12 +8,11 @@ public class Menu {
         int choice;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+        String BLUE = "\u001B[34m";
+        String GREEN = "\u001B[32m";
+        String RESET = "\u001B[0m";
+
         do {
-
-            String BLUE = "\u001B[34m";
-            String GREEN = "\u001B[32m";
-            String RESET = "\u001B[0m";
-
             System.out.println(BLUE + "=== HLAVNÍ MENU ===");
             System.out.println(GREEN + "1. Přidání nové knihy");
             System.out.println("2. Úprava knihy");
@@ -35,7 +34,7 @@ public class Menu {
                 case 1 -> Library.addBook();
                 case 2 -> Library.editBook();
                 case 3 -> Library.deleteBook();
-                case 4 -> System.out.println("Vybrali jste volbu 4.");
+                case 4 -> Library.changeBookAvailbility();
                 case 5 -> System.out.println("Vybrali jste volbu 5.");
                 case 6 -> System.out.println("Vybrali jste volbu 6.");
                 case 7 -> {
