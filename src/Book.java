@@ -43,12 +43,7 @@ abstract public class Book {
         }
     }
     public void setAvailability(String availability) {
-        if (availability.toLowerCase() == "yes") {
-            this.availability = true;
-        }
-        else {
-            this.availability = false;
-        }
+        this.availability = availability.equalsIgnoreCase("yes");
     }
 
     public Book(String name, String autor, int publishYear, boolean availability) {

@@ -5,22 +5,40 @@ import java.util.*;
 
 public class Library {
 
-    //static ArrayList<Book> books = new ArrayList<Book>();
     static ArrayList<Book> books = new ArrayList<>();
 
-    public static void addBook() throws IOException {
+    public static void addBook()  {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Zadejte název knihy: ");
-        String title = reader.readLine();
+        String title;
+        try {
+            title = reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.print("Zadejte autora/y knihy ve formátu [jméno příjmení, jméno příjmění, ...]: ");
-        String autor = reader.readLine();
+        String autor;
+        try {
+            autor = reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.print("Zadejte rok vydání knihy: ");
-        int publishYear = Integer.parseInt(reader.readLine());
+        int publishYear;
+        try {
+            publishYear = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         int bookType;
         System.out.print("Jedná se o román (1) nebo učebnici (2)?: ");
         while (true) {
-            bookType = Integer.parseInt(reader.readLine());
+            try {
+                bookType = Integer.parseInt(reader.readLine());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             if (bookType == 1 || bookType == 2) break;
             else System.out.print("Zadejte 1 nebo 2: ");
         }
@@ -33,7 +51,12 @@ public class Library {
                 System.out.print("\b\b): ");
 
                 while (true) {
-                    String stringGenre = reader.readLine();
+                    String stringGenre;
+                    try {
+                        stringGenre = reader.readLine();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
 
                     boolean found = false;
                     for (Novel.Genre genre : Novel.Genre.values()) {
@@ -55,7 +78,7 @@ public class Library {
                 int grade = 0;
                 try {
                     grade = Integer.parseInt(reader.readLine());
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | IOException e) {
                     System.out.println("Neplatná volba. Zadejte prosím číslo.");
                 }
                 //sem asi pridat while
@@ -66,87 +89,86 @@ public class Library {
         }
     }
 
-    public static void editBook() throws IOException {
+    public static void editBook() {
+        Book bookToEdit = findBook();
+        if (bookToEdit == null) return;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        for (Book book : books) {
-            System.out.printf("%s\n", book.getName());
+
+        System.out.printf("Změnit název knihy [%s]: ", bookToEdit.getName());
+        String newName;
+        try {
+            newName = reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        boolean endLoop = true;
-        while (endLoop) {
-            System.out.print("vyberte si jakou knihu chcete změnit: ");
-            String choice = reader.readLine();
+        if (!newName.isEmpty()) {
+            bookToEdit.setName(newName);
+        } else {
+            newName = bookToEdit.getName();
+        }
 
-            for (Book book : books) {
-                if (book.getName().equalsIgnoreCase(choice)) {
-                    System.out.println("nalezeno\n----------------------");
+        System.out.printf("Změnit autora/y knihy [%s]: ", bookToEdit.getAutor());
+        String newAutor;
+        try {
+            newAutor = reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (!newAutor.isEmpty()) {
+            bookToEdit.setAutor(newAutor);
+        } else {
+            newAutor = bookToEdit.getAutor();
+        }
 
-                    System.out.printf("Změnit název knihy [%s]: ", book.getName());
-                    String newName = reader.readLine();
-                    if (!newName.isEmpty()) {
-                        book.setName(newName);
-                    }
-                    else {
-                        newName = book.getName();
-                    }
-
-                    System.out.printf("Změnit autora/y knihy [%s]: ", book.getAutor());
-                    String newAutor = reader.readLine();
-                    if (!newAutor.isEmpty()) {
-                        book.setAutor(newAutor);
-                    }
-                    else {
-                        newAutor = book.getAutor();
-                    }
-
-                    System.out.printf("Změnit rok vydání knihy [%d]: ", book.getPublishYear());
-                    String input = reader.readLine();
-                    int newPublishYear;
-                    try {
-                        if (!input.isEmpty()) {
-                            newPublishYear = Integer.parseInt(input);
-                            book.setPublishYear(newPublishYear);
-                        }
-                        else {
-                            newPublishYear = book.getPublishYear();
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Neplatný formát ročníku. Zůstává původní rok.");
-                        newPublishYear = book.getPublishYear();
-                    }
-
-                    String typeChange;
-                    System.out.printf("Kniha je %s, Chcete změnit typ? [a/n]: ", book);
-                    while (true) {
-                        typeChange = reader.readLine();
-                        if (typeChange.equals("a") || typeChange.equals("n")) break;
-                        else System.out.print("Změnit [a/n]: ");
-                    }
-
-                    if (typeChange.equals("n")) {           //tady pridat jeste if, pokud nechce menit (neda input)
-                        if (book instanceof Novel) {
-                            ((Novel)book).setGenre(changeGenre());
-                        }
-                        else {
-                            ((Textbook)book).setSuitableGrade(changeGrade());
-                        }
-                    }
-                    else {
-                        if (book instanceof Novel) {
-                            book = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
-                        }
-                        else {
-                            book = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
-                        }
-                    }
-                    endLoop = false;
-                }
+        System.out.printf("Změnit rok vydání knihy [%d]: ", bookToEdit.getPublishYear());
+        String input;
+        try {
+            input = reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int newPublishYear;
+        try {
+            if (!input.isEmpty()) {
+                newPublishYear = Integer.parseInt(input);
+                bookToEdit.setPublishYear(newPublishYear);
+            } else {
+                newPublishYear = bookToEdit.getPublishYear();
             }
-            if (endLoop)
-                System.out.println("Nenalezeno, zkus to prosím znovu");
+        } catch (NumberFormatException e) {
+            System.out.println("Neplatný formát ročníku. Zůstává původní rok.");
+            newPublishYear = bookToEdit.getPublishYear();
         }
+
+        String typeChange;
+        System.out.printf("Kniha je %s, Chcete změnit typ? [a/n]: ", bookToEdit);
+        while (true) {
+            try {
+                typeChange = reader.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (typeChange.equals("a") || typeChange.equals("n")) break;
+            else System.out.print("Změnit [a/n]: ");
+        }
+
+        if (typeChange.equals("n")) {           //tady pridat jeste if, pokud nechce menit (neda input)
+            if (bookToEdit instanceof Novel) {
+                ((Novel) bookToEdit).setGenre(changeGenre());
+            } else {
+                ((Textbook) bookToEdit).setSuitableGrade(changeGrade());
+            }
+        } else {
+            if (bookToEdit instanceof Novel) {
+                bookToEdit = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
+            } else {
+                bookToEdit = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
+            }
+        }
+
     }
 
-    static Novel.Genre changeGenre() throws IOException{
+    static Novel.Genre changeGenre() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Vyberte žánr (");
         for (Novel.Genre genre : Novel.Genre.values()) {
@@ -154,27 +176,70 @@ public class Library {
         }
         System.out.print("\b\b): ");
         while (true) {
-            String stringGenre = reader.readLine();
+            String stringGenre;
+            try {
+                stringGenre = reader.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             for (Novel.Genre genre : Novel.Genre.values()) {
                 if (stringGenre.equalsIgnoreCase(String.valueOf(genre))) {
                     return genre;
                 }
             }
             System.out.print("Špatný vstup zkus to znovu: ");
-        }        
+        }
     }
 
-    static int changeGrade() throws IOException{
+    static int changeGrade() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Napište vhodný ročník: ");
         int grade = 0;
         try {
             grade = Integer.parseInt(reader.readLine());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IOException e) {
             System.out.print("Neplatná volba. Zadejte prosím číslo: ");
         }
         //sem asi pridat while
 
         return grade;
+    }
+
+    public static void deleteBook() {
+        Book bookToDelete = findBook();
+
+        if (bookToDelete != null) {
+            books.remove(bookToDelete);
+            String name = bookToDelete.getName();
+            System.out.printf("Kniha %s byla smazána.%n", name);
+        }
+    }
+
+    public static Book findBook() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        if (!books.isEmpty()) {
+            for (Book book : books) {
+                System.out.printf("%s\n", book.getName());
+            }
+            while (true) {
+                System.out.print("Zadejte název knihy: ");
+                String choice;
+                try {
+                    choice = reader.readLine();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                for (Book book : books) {
+                    if (book.getName().equalsIgnoreCase(choice)) {
+                        //System.out.println("nalezeno\n----------------------");
+                        return book;
+                    }
+                }
+                System.out.println("Nenalezeno, zkus to prosím znovu.");
+            }
+        }
+        System.out.println("Seznam knih je prázdný.");
+        return null;
     }
 }
