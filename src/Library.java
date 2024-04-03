@@ -263,4 +263,20 @@ public class Library {
             bookToChangeAvaibility.setAvailability(!bookToChangeAvaibility.getAvailability());
         }
     }
+
+    public static void listOfBooks() {
+
+    }
+
+    public static void printBookInfo() {
+        Book bookToPrintInfo = findBook();
+        System.out.printf("----------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n", bookToPrintInfo.getName(), bookToPrintInfo.getAutor(), bookToPrintInfo.getPublishYear(), bookToPrintInfo.getStringAvailability());
+        if (bookToPrintInfo instanceof Novel) {
+
+            System.out.printf("Kniha je román a žánr je %s\n", ((Novel) bookToPrintInfo).getGenre());
+        }
+        else {
+            System.out.printf("Kniha je učebnice a je vhodná pro %d. ročníky\n", ((Textbook) bookToPrintInfo).getSuitableGrade());
+        }
+    }
 }

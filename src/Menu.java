@@ -35,8 +35,8 @@ public class Menu {
                 case 2 -> Library.editBook();
                 case 3 -> Library.deleteBook();
                 case 4 -> Library.changeBookAvailbility();
-                case 5 -> System.out.println("Vybrali jste volbu 5.");
-                case 6 -> System.out.println("Vybrali jste volbu 6.");
+                case 5 -> Library.listOfBooks();
+                case 6 -> Library.printBookInfo();
                 case 7 -> {
                     System.out.println("Program se ukončuje.");
                     return;
