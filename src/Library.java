@@ -103,13 +103,6 @@ public class Library {
         System.out.printf("Kniha je %s, Chcete změnit typ? [a/n]: ", bookToEdit);
         String typeChange = inputCheck.checkString();
 
-        // while (true) {
-        // if (typeChange.equals("a") || typeChange.equals("n"))
-        // break;
-        // else
-        // System.out.print("Změnit [a/n]: ");
-        // }
-
         if (typeChange.equals("n") || typeChange.isEmpty()) {
             if (bookToEdit instanceof Novel) {
                 ((Novel) bookToEdit).setGenre(changeGenre());
