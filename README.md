@@ -1,7 +1,7 @@
 # Správa knihovny - Java Aplikace
 ## Obsah
 
-+ [Funkce Aplikace](#zadání)
++ [Zadání](#zadání)
 + [Instalace](#instalace)
 + [Použití](#použití)
   
