@@ -12,10 +12,15 @@ public class inputCheck {
                 return choice;
             } catch (NumberFormatException e) {
                 System.out.print("Neplatná volba. Zadejte prosím číslo: ");
-                continue;
             } catch (IOException e) {
                 System.out.println("Nastala vyjimka." + e.getMessage());
                 System.exit(1);
+            } finally {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Nastala vyjimka." + e.getMessage());
+                }
             }
         } while (true);
     }
@@ -33,22 +38,32 @@ public class inputCheck {
             } catch (IOException e) {
                 System.out.println("Nastala vyjimka." + e.getMessage());
                 System.exit(1);
+            } finally {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Nastala vyjimka." + e.getMessage());
+                }
             }
         } while (true);
     }
 
     public static String checkString() {
-        String choice;
+        String choice = null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        do {
-            try {
-                choice = reader.readLine();
-                return choice;
+        try {
+            choice = reader.readLine();
 
+        } catch (IOException e) {
+            System.out.println("Nastala vyjimka. " + e.getMessage());
+            System.exit(1);
+        } finally {
+            try {
+                reader.close();
             } catch (IOException e) {
-                System.out.println("Nastala vyjimka." + e.getMessage());
-                System.exit(1);
+                System.out.println("Nastala vyjimka. " + e.getMessage());
             }
-        } while (true);
+        }
+        return choice;
     }
 }
