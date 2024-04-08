@@ -21,7 +21,7 @@ public class Menu {
                 case 1 -> Library.addBook();
                 case 2 -> Library.editBook();
                 case 3 -> Library.deleteBook();
-                case 4 -> Library.changeBookAvailbility();
+                case 4 -> Library.changeBookAvailability();
                 case 5 -> Library.listOfBooks();
                 case 6 -> Library.printBookInfo();
                 case 7 -> {
