@@ -138,7 +138,8 @@ public class Library {
 
     static int changeGrade() {
         System.out.print("Napište vhodný ročník: ");
-        return inputCheck.checkInt();
+        int grade = inputCheck.checkInt();
+        return grade;
     }
 
     public static void deleteBook() {
@@ -175,25 +176,22 @@ public class Library {
         return null;
     }
 
-    public static void changeBookAvailability() {
+    public static void changeBookAvailbility() {
         String RED = "\u001B[31m";
         String RESET = "\u001B[0m";
-        Book bookToChangeAvailability = findBook();
-        if (bookToChangeAvailability == null) {
-            return;
-        }
-        String availabilityChange;
+        Book bookToChangeAvaibility = findBook();
+        String avaibilityChange;
         System.out.printf("Kniha je " + RED + "%s" + RESET + ", Chcete změnit dostupnost? [a/n]: ",
-                bookToChangeAvailability.getStringAvailability());
+                bookToChangeAvaibility.getStringAvailability());
         while (true) {
-            availabilityChange = inputCheck.checkNullString();
-            if (availabilityChange.equals("a") || availabilityChange.equals("n"))
+            avaibilityChange = inputCheck.checkNullString();
+            if (avaibilityChange.equals("a") || avaibilityChange.equals("n"))
                 break;
             else
                 System.out.print("Změnit [a/n]: ");
         }
-        if (availabilityChange.equals("a")) {
-            bookToChangeAvailability.setAvailability(!bookToChangeAvailability.getAvailability());
+        if (avaibilityChange.equals("a")) {
+            bookToChangeAvaibility.setAvailability(!bookToChangeAvaibility.getAvailability());
         }
     }
 
