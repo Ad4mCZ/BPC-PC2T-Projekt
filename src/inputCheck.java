@@ -56,7 +56,7 @@ public class inputCheck {
 
         } catch (IOException e) {
             System.out.println("Nastala vyjimka. " + e.getMessage());
-            System.exit(1);
+            System.exit(0);
         } finally {
             try {
                 reader.close();
