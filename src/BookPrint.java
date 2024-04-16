@@ -29,12 +29,14 @@ public class BookPrint {
         }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
+        sc.close();
     }
 
     public static void printBookInfo() {
         Scanner sc = new Scanner(System.in);
         Book bookToPrintInfo = Library.findBook();
         if (bookToPrintInfo == null) {
+            sc.close();
             return;
         }
         System.out.printf(
@@ -50,6 +52,7 @@ public class BookPrint {
         }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
+        sc.close();
     }
 
     public static void autorsBooks() {
@@ -61,6 +64,7 @@ public class BookPrint {
         }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
+        sc.close();
     }
 
     public static ArrayList<String> findAutor() {
@@ -99,12 +103,7 @@ public class BookPrint {
     }
 
     public static void booksByGenre() {
-        Scanner sc = new Scanner(System.in);
-        
-        
-
-
-
+        Scanner sc = new Scanner(System.in);    
         if (!Library.books.isEmpty()) {
             System.out.println("------------------");
             for (Novel.Genre genre : Novel.Genre.values()) {
@@ -126,6 +125,7 @@ public class BookPrint {
                 }
                 System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
                 sc.nextLine();
+                sc.close();
                 return;
             }
         }
@@ -133,6 +133,7 @@ public class BookPrint {
 
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
+        sc.close();
     }
 
     public static void borrowedBooks() {
@@ -140,5 +141,6 @@ public class BookPrint {
 
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
+        sc.close();
     }
 }
