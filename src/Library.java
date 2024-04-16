@@ -4,6 +4,10 @@ public class Library {
 
     static ArrayList<Book> books = new ArrayList<>();
 
+    //
+    //
+    //
+
     public static void addBook() {
 
         System.out.print("Zadejte název knihy: ");
@@ -62,6 +66,10 @@ public class Library {
         }
     }
 
+    //
+    //
+    //
+    
     public static void editBook() {
         Book bookToEdit = findBook();
         if (bookToEdit == null)
@@ -120,6 +128,10 @@ public class Library {
 
     }
 
+    //
+    //
+    //
+    
     static Novel.Genre changeGenre() {
         System.out.print("Vyberte žánr (");
         for (Novel.Genre genre : Novel.Genre.values()) {
@@ -143,6 +155,10 @@ public class Library {
         return grade;
     }
 
+    //
+    //
+    //
+    
     public static void deleteBook() {
         Book bookToDelete = findBook();
 
@@ -154,6 +170,10 @@ public class Library {
         System.out.printf("Kniha %s byla smazána.%n", name);
     }
 
+    //
+    //
+    //
+    
     public static Book findBook() {
         if (!books.isEmpty()) {
             System.out.println("------------------");
@@ -196,6 +216,10 @@ public class Library {
         }
     }
 
+    //
+    //
+    //
+    
     public static void listOfBooks() {
 
     }
