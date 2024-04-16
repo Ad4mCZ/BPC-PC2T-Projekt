@@ -13,8 +13,7 @@ public class Menu {
             System.out.println("3. Smazání knihy");
             System.out.println("4. Změnit dostupnost knihy");
             System.out.println("5. Výpis knih");
-            System.out.println("6. Vyhledání knihy");
-            System.out.println("7. Vypnutí programu");
+            System.out.println("6. Vypnutí programu");
             System.out.print(RESET + "Vyberte možnost: ");
 
             switch (inputCheck.checkInt()) {
@@ -22,9 +21,8 @@ public class Menu {
                 case 2 -> Library.editBook();
                 case 3 -> Library.deleteBook();
                 case 4 -> Library.changeBookAvailbility();
-                case 5 -> Library.listOfBooks();
-                case 6 -> Library.printBookInfo();
-                case 7 -> {
+                case 5 -> BookPrint.print();
+                case 6 -> {
                     System.out.println("Program se ukončuje.");
                     return;
                 }
