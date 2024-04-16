@@ -1,15 +1,22 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class FilesHandling {
     public static void Serialization(Book book) {
         String folderPath = "books/";
-        String fileName = folderPath + "Object_" + UUID.randomUUID().toString() + ".ser";
-        FileOutputStream fileOut = null;
+        String fileName = folderPath + "Object_" + book.getName() + ".ser";
+
+        File folder = new File(folderPath);
+        if (!folder.exists()){
+            boolean folderCreated = folder.mkdirs();
+            if (!folderCreated){
+                System.err.println("Nelze vytvorit slozku");
+            }
+        }
+
         try {
-            fileOut = new FileOutputStream(fileName);
+            FileOutputStream fileOut = new FileOutputStream(fileName);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(book);
             objectOut.close();
@@ -19,7 +26,7 @@ public class FilesHandling {
         }
     }
 
-    public static void DeSerializaton() {
+    public static void DeSerialization() {
         String folderPath = "books/";
         File folder = new File(folderPath);
         File[] files = folder.listFiles();
@@ -33,10 +40,10 @@ public class FilesHandling {
                     ObjectInputStream objectIn = new ObjectInputStream(fileIn);
                     Book deserializedBook = (Book) objectIn.readObject();
                     deserializedBooks.add(deserializedBook);
-                    objectIn.close();;
+                    objectIn.close();
                     fileIn.close();
                     }catch (IOException | ClassNotFoundException e ){
-                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
 
                 }
