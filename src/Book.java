@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-abstract public class Book {
+abstract public class Book implements Serializable {
 
     private String name;
     public String getName() {

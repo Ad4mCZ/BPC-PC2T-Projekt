@@ -40,6 +40,7 @@ public class Library {
                             Novel novel = new Novel(title, autor, publishYear, true, genre);
                             System.out.println("Přidán román: " + novel.getName());
                             books.add(novel);
+                            FilesHandling.Serialization(novel);
                             found = true;
                             break;
                         }
