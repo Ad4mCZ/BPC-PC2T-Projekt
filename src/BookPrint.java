@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class BookPrint {
 
     public static void print() {
-        autorsBooks();
+        booksByGenre();
     }
 
     public static void AlfabetList() {
@@ -16,7 +16,7 @@ public class BookPrint {
         Collections.sort(books, Comparator.comparing(o -> o.getName().toLowerCase()));
         for (Book book : books) {
             System.out.printf(
-                "-------------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n",
+                "------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n",
                 book.getName(), book.getAutor(), book.getPublishYear(),
                 book.getStringAvailability());
         if (book instanceof Novel) {
@@ -27,7 +27,7 @@ public class BookPrint {
                     ((Textbook) book).getSuitableGrade());
         }
         }
-        System.out.println("-------------------------\nStiskněte Enter pro návrat do menu: ");
+        System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
     }
 
@@ -38,7 +38,7 @@ public class BookPrint {
             return;
         }
         System.out.printf(
-                "-------------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n",
+                "------------------\nNázev knihy: %s\nAutor/ři knihy: %s\nRok vydání knihy: %d\nKniha je %s\n",
                 bookToPrintInfo.getName(), bookToPrintInfo.getAutor(), bookToPrintInfo.getPublishYear(),
                 bookToPrintInfo.getStringAvailability());
         if (bookToPrintInfo instanceof Novel) {
@@ -48,32 +48,97 @@ public class BookPrint {
             System.out.printf("Kniha je učebnice a je vhodná pro %d. ročník.\n",
                     ((Textbook) bookToPrintInfo).getSuitableGrade());
         }
-        System.out.println("-------------------------\nStiskněte Enter pro návrat do menu: ");
+        System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
     }
 
     public static void autorsBooks() {
         Scanner sc = new Scanner(System.in);
-        List<String> autorsBooks = Library.findAutor();
+        List<String> autorsBooks = findAutor();
         Collections.sort(autorsBooks, String.CASE_INSENSITIVE_ORDER);
         for (String book : autorsBooks) {
             System.out.println(book);
         }
-        System.out.println("-------------------------\nStiskněte Enter pro návrat do menu: ");
+        System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
+    }
+
+    public static ArrayList<String> findAutor() {
+        ArrayList<String> autorsBooks = new ArrayList<>();
+        ArrayList<String> autors = new ArrayList<>();
+        if (!Library.books.isEmpty()) {
+            System.out.println("------------------");
+            for (Book book : Library.books) {
+                if (!autors.contains(book.getAutor())) {
+                    System.out.printf("%s\n", book.getAutor());
+                    autors.add(book.getAutor());
+                }
+            }
+            System.out.println("------------------");
+
+            while (true) {
+                System.out.print("Zadejte autora jehož knihy chcete vypsat: ");
+                String choice = inputCheck.checkNullString();
+
+                for (Book book : Library.books) {
+                    if (book.getAutor().equalsIgnoreCase(choice)) {
+                        autorsBooks.add(book.getName());
+                    }
+                }
+
+                if (!autorsBooks.isEmpty()) {
+                    return autorsBooks;
+                }
+                else {
+                    System.out.println("Nenalezeno, zkus to prosím znovu.");
+                }
+            }
+        }
+        System.out.println("V seznamu nejsou žádné knihy.");
+        return null;
     }
 
     public static void booksByGenre() {
         Scanner sc = new Scanner(System.in);
+        
+        
 
-        System.out.println("-------------------------\nStiskněte Enter pro návrat do menu: ");
+
+
+        if (!Library.books.isEmpty()) {
+            System.out.println("------------------");
+            for (Novel.Genre genre : Novel.Genre.values()) {
+                System.out.printf("%s\n", genre);
+            }
+            System.out.println("------------------");
+
+            while (true) {
+                System.out.print("Zadejte žánr pro výpis příslušných knih: ");
+                String choice = inputCheck.checkNullString();
+
+                for (Book book : Library.books) {
+                    if (book instanceof Novel) {
+                        String genre =  String.format("%s", ((Novel) book).getGenre());
+                        if (genre.equalsIgnoreCase(choice)) {
+                            System.out.println(book.getName());
+                        }
+                    }
+                }
+                System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
+                sc.nextLine();
+                return;
+            }
+        }
+        System.out.println("V seznamu nejsou žádné knihy.");
+
+        System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
     }
 
     public static void borrowedBooks() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("-------------------------\nStiskněte Enter pro návrat do menu: ");
+        System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
     }
 }

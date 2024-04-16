@@ -197,42 +197,6 @@ public class Library {
         return null;
     }
 
-    public static ArrayList<String> findAutor() {
-        ArrayList<String> autorsBooks = new ArrayList<>();
-        ArrayList<String> autors = new ArrayList<>();
-        if (!books.isEmpty()) {
-            System.out.println("------------------");
-            for (Book book : books) {
-                if (!autors.contains(book.getAutor())) {
-                    System.out.printf("%s\n", book.getAutor());
-                    autors.add(book.getAutor());
-                }
-            }
-            System.out.println("------------------");
-
-            while (true) {
-                System.out.print("Zadejte autora jehož knihy chcete vypsat: ");
-                String choice = inputCheck.checkNullString();
-
-                for (Book book : books) {
-                    if (book.getAutor().equalsIgnoreCase(choice)) {
-                        autorsBooks.add(book.getName());
-                    }
-                }
-
-                if (!autorsBooks.isEmpty()) {
-                    return autorsBooks;
-                }
-                else {
-                    System.out.println("Nenalezeno, zkus to prosím znovu.");
-                }
-            }
-        }
-        System.out.println("V seznamu nejsou žádné knihy.");
-        return null;
-    }
-
-
     public static void changeBookAvailbility() {
         String RED = "\u001B[31m";
         String RESET = "\u001B[0m";
