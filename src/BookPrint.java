@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class BookPrint {
 
     public static void print() {
-        AlfabetList();
+        autorsBooks();
     }
 
     public static void AlfabetList() {
@@ -54,7 +54,11 @@ public class BookPrint {
 
     public static void autorsBooks() {
         Scanner sc = new Scanner(System.in);
-
+        List<String> autorsBooks = Library.findAutor();
+        Collections.sort(autorsBooks, String.CASE_INSENSITIVE_ORDER);
+        for (String book : autorsBooks) {
+            System.out.println(book);
+        }
         System.out.println("-------------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
     }
