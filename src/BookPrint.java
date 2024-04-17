@@ -7,7 +7,22 @@ import java.util.Scanner;
 public class BookPrint {
 
     public static void print() {
-        booksByGenre();
+        System.out.println("--- MENU VÝPISU ---");
+        System.out.println("1. Vypsat knihy podle abecedy");
+        System.out.println("2. Vypsat info o určité knize");
+        System.out.println("3. Vypsat knihy určitého autora");
+        System.out.println("4. Vypsat knihy určitého žánru");
+        System.out.println("5. Vypsat nedostupné knihy");
+        System.out.print("Vyberte možnost: ");
+
+        switch (inputCheck.checkInt()) {
+            case 1 -> AlfabetList();
+            case 2 -> printBookInfo();
+            case 3 -> autorsBooks();
+            case 4 -> booksByGenre();
+            case 5 -> borrowedBooks();
+            default -> System.out.println("Neplatná volba.");
+        }
     }
 
     public static void AlfabetList() {
@@ -29,14 +44,12 @@ public class BookPrint {
         }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
-        sc.close();
     }
 
     public static void printBookInfo() {
         Scanner sc = new Scanner(System.in);
         Book bookToPrintInfo = Library.findBook();
         if (bookToPrintInfo == null) {
-            sc.close();
             return;
         }
         System.out.printf(
@@ -52,7 +65,6 @@ public class BookPrint {
         }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
-        sc.close();
     }
 
     public static void autorsBooks() {
@@ -64,7 +76,6 @@ public class BookPrint {
         }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
-        sc.close();
     }
 
     public static ArrayList<String> findAutor() {
@@ -125,7 +136,6 @@ public class BookPrint {
                 }
                 System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
                 sc.nextLine();
-                sc.close();
                 return;
             }
         }
@@ -133,14 +143,23 @@ public class BookPrint {
 
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
-        sc.close();
     }
 
     public static void borrowedBooks() {
         Scanner sc = new Scanner(System.in);
-
+        System.out.println("------------------");
+        for (Book book : Library.books) {
+            if (!book.getAvailability()) {
+                System.out.printf("Název: %s", book.getName());
+                if (book instanceof Novel) {
+                    System.out.println(", typ: román");
+                }
+                else {
+                    System.out.println(", typ: učebnice");
+                }
+            }
+        }
         System.out.println("------------------\nStiskněte Enter pro návrat do menu: ");
         sc.nextLine();
-        sc.close();
     }
 }
