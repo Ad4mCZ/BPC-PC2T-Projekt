@@ -8,9 +8,9 @@ public class FilesHandling {
         String fileName = folderPath + "Object_" + book.getName() + ".ser";
 
         File folder = new File(folderPath);
-        if (!folder.exists()){
+        if (!folder.exists()) {
             boolean folderCreated = folder.mkdirs();
-            if (!folderCreated){
+            if (!folderCreated) {
                 System.err.println("Nelze vytvorit slozku");
             }
         }
@@ -34,15 +34,15 @@ public class FilesHandling {
 
         if (files != null) {
             for (File file : files) {
-                if (file.isFile() && file.getName().endsWith(".ser")){
-                    try{
-                    FileInputStream fileIn = new FileInputStream(file);
-                    ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-                    Book deserializedBook = (Book) objectIn.readObject();
-                    deserializedBooks.add(deserializedBook);
-                    objectIn.close();
-                    fileIn.close();
-                    }catch (IOException | ClassNotFoundException e ){
+                if (file.isFile() && file.getName().endsWith(".ser")) {
+                    try {
+                        FileInputStream fileIn = new FileInputStream(file);
+                        ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+                        Book deserializedBook = (Book) objectIn.readObject();
+                        deserializedBooks.add(deserializedBook);
+                        objectIn.close();
+                        fileIn.close();
+                    } catch (IOException | ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
 
@@ -51,5 +51,17 @@ public class FilesHandling {
         }
         Library.books.addAll(deserializedBooks);
 
+    }
+
+    public static void DeleteFile(Book book) {
+        String folderPath = "books/";
+        String fileName = folderPath + "Object_" + book.getName() + ".ser";
+        File file = new File(fileName);
+
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
     }
 }

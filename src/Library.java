@@ -62,6 +62,7 @@ public class Library {
                 Textbook textbook = new Textbook(title, autor, publishYear, true, grade);
                 System.out.println("Přidána učebnice: " + textbook.getName());
                 books.add(textbook);
+                FilesHandling.Serialization(textbook);
                 break;
         }
     }
@@ -69,7 +70,7 @@ public class Library {
     //
     //
     //
-    
+
     public static void editBook() {
         Book bookToEdit = findBook();
         if (bookToEdit == null)
@@ -93,7 +94,6 @@ public class Library {
             newAutor = bookToEdit.getAutor();
         }
 
-        // TOHLE NEVIM JAK UDELAT LEPE, ABY TAM NEMUSELY BYT DVE PROMENNE.
         System.out.printf("Změnit rok vydání knihy [%d]: ", bookToEdit.getPublishYear());
         String input = inputCheck.checkString();
         int newPublishYear;
@@ -121,8 +121,10 @@ public class Library {
         } else {
             if (bookToEdit instanceof Novel) {
                 bookToEdit = new Textbook(newName, newAutor, newPublishYear, true, changeGrade());
+                FilesHandling.Serialization(bookToEdit);
             } else {
                 bookToEdit = new Novel(newName, newAutor, newPublishYear, true, changeGenre());
+                FilesHandling.Serialization(bookToEdit);
             }
         }
 
@@ -131,7 +133,7 @@ public class Library {
     //
     //
     //
-    
+
     static Novel.Genre changeGenre() {
         System.out.print("Vyberte žánr (");
         for (Novel.Genre genre : Novel.Genre.values()) {
@@ -158,13 +160,14 @@ public class Library {
     //
     //
     //
-    
+
     public static void deleteBook() {
         Book bookToDelete = findBook();
 
         if (bookToDelete == null) {
             return;
         }
+        FilesHandling.DeleteFile(bookToDelete);
         books.remove(bookToDelete);
         String name = bookToDelete.getName();
         System.out.printf("Kniha %s byla smazána.%n", name);
@@ -173,7 +176,7 @@ public class Library {
     //
     //
     //
-    
+
     public static Book findBook() {
         if (!books.isEmpty()) {
             System.out.println("------------------");
