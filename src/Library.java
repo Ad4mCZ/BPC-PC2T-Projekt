@@ -7,6 +7,9 @@ public class Library {
     //
     //
     //
+    public Library(){
+        books = new ArrayList<>();
+    }
 
     public static void addBook() {
 
@@ -153,8 +156,7 @@ public class Library {
 
     static int changeGrade() {
         System.out.print("Napište vhodný ročník: ");
-        int grade = inputCheck.checkInt();
-        return grade;
+        return inputCheck.checkInt();
     }
 
     //

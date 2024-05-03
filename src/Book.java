@@ -26,6 +26,7 @@ abstract public class Book implements Serializable {
         this.autor.addAll(Arrays.asList(autorField));
     }
 
+
     private int publishYear;
     public int getPublishYear() {
         return publishYear;

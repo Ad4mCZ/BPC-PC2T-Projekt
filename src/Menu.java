@@ -23,6 +23,7 @@ public class Menu {
                 case 4 -> Library.changeBookAvailbility();
                 case 5 -> BookPrint.print();
                 case 6 -> {
+                    Database.dbSave();
                     System.out.println("Program se ukončuje.");
                     return;
                 }
