@@ -18,7 +18,7 @@ abstract public class Book implements Serializable {
         for (String item : autor) {
             txt = String.format("%s%s", txt, item);
         }
-        return txt;//String.format("%s\b\b", txt);
+        return txt;
     }
     public void setAutor(String autor) {
         String[] autorField = autor.split(", ");
